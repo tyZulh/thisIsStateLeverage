@@ -15,10 +15,25 @@ function BeersList() {
     fetchBeers();
   }, []);
 
+  const removeBeer = (id) => {
+    const filteredBeers = beers.filter((beer) => beer.id !== id);
+    setBeers(filteredBeers);
+  };
+
   return (
     <div className="flex flex-wrap justify-around">
       {beers.map((beer) => {
-        return <BeerCard key={beer.id} name={beer.name} abv={beer.abv} ibu={beer.ibu} description={beer.description} />;
+        return (
+          <BeerCard
+            key={beer.id}
+            name={beer.name}
+            abv={beer.abv}
+            ibu={beer.ibu}
+            description={beer.description}
+            id={beer.id}
+            handleDelete={removeBeer}
+          />
+        );
       })}
     </div>
   );
